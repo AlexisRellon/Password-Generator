@@ -1,0 +1,136 @@
+/*Global Style*/
+* {
+    -fx-font-family: "Calibri Light";
+    -fx-font-size: 13px;
+    -fx-background-color: #212121;
+    -fx-text-fill: #FAFAFF;
+}
+
+.root {
+    -fx-border-width: 0.5;
+    -fx-border-color: rgba(6, 190, 225, 0.8);
+}
+
+.label {
+    -fx-background-color: null;
+}
+
+.window, .split-pane {
+    -fx-background-color: #212121;
+}
+
+/*Close Button Style*/
+.close-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-translate-z: -1;
+}
+
+.close-button:hover {
+    -fx-background-color: #F2545B;
+    -fx-background-radius: 0;
+    -fx-translate-z: -1;
+}
+
+.close-button:pressed {
+    -fx-background-color: #e86a5c;
+}
+
+/*Menu Style*/
+.menu-container {
+    -fx-background-color: #212121;
+    -fx-border-width: 1px 0 1px 0;
+    -fx-border-color: #292929;
+}
+
+.menu-container .menu {
+    -fx-end-margin: 50px;
+    -fx-padding: 5px 1.25em;
+}
+
+
+.menu-container .menu:hover {
+    -fx-background-color: #313133;
+    -fx-background-radius: 10px;
+}
+.menu-container .menu:pressed {
+    -fx-background-color: #3a3a3b;
+}
+
+.menu-container .menu .menu-item {
+    -fx-background-color: #171717;
+}
+
+.menu-container .menu .menu-item:hover {
+    -fx-background-color: #313133;
+}
+.menu-container .menu .menu-item:pressed {
+    -fx-background-color: #3a3a3b;
+}
+
+.menu-container .menu .menu-item .label:hover {
+    -fx-background-color: #26272a;
+}
+
+/*Container Style*/
+.split-container {
+    -fx-padding: 20px;
+}
+
+.split-container > .split-pane-divider {
+    -fx-padding: 7;
+    -fx-background-color: transparent;
+}
+
+.top-container, .bottom-container {
+    -fx-background-color: rgba(255, 255, 255, 0.13);
+    -fx-background-radius: 10;
+}
+
+/*Grid pane style*/
+.grid-pane {
+    -fx-background-color: transparent;
+}
+
+.grid-pane > .label {
+    -fx-padding: 0 0 0 5;
+}
+
+.grid-pane > .grid-pane-options {
+    -fx-background-color: transparent;
+}
+
+/*Check box styles*/
+/* Checked state */
+.check-box {
+    -fx-background-color: transparent;
+}
+
+.check-box .box .mark {
+    -fx-background-color: #212121;
+}
+
+.check-box:selected .box .mark {
+    -fx-background-color: rgba(6, 190, 225, 0.8);
+}
+
+/*Input fields style*/
+.pass-len-field > .text-field {
+    -fx-background-color: #8a8a8a;
+    -fx-background-radius: 5;
+    -fx-text-fill: #FAFAFF;
+    -fx-padding: 5;
+}
+
+.text-field {
+    -fx-background-color: #212121;
+}
+
+.grid-pane > .pass-len-field > .text-field {
+    -fx-pref-width: 10;
+    -fx-pref-height: 10;
+}
+
+.pass-len-field > .label {
+    -fx-background-color: transparent;
+}

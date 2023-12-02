@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane fx:id="display" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="630.0" minWidth="650.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" prefHeight="664.0" prefWidth="650.0" styleClass="window" stylesheets="@../../../CSS/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_gui.MainController">
+   <children>
+      <SplitPane dividerPositions="0.6022556390977443" layoutX="-14.0" layoutY="51.0" orientation="VERTICAL" prefHeight="572.0" prefWidth="650.0" styleClass="split-container" stylesheets="@../../../CSS/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <items>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="top-container" stylesheets="@../../../CSS/style.css">
+               <children>
+                  <GridPane hgap="5.0" layoutX="14.0" layoutY="12.0" prefHeight="245.0" prefWidth="609.0" styleClass="grid-pane" stylesheets="@../../../CSS/style.css" vgap="5.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="12.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="287.4000244140625" minWidth="10.0" prefWidth="110.4" />
+                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="514.666650390625" minWidth="10.0" prefWidth="489.6000000000001" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints maxHeight="62.79999389648438" minHeight="10.0" prefHeight="19.600008392333987" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="130.1999969482422" minHeight="10.0" prefHeight="130.1999969482422" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="61.20000305175782" minHeight="10.0" prefHeight="35.000024414062494" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="61.20000305175782" minHeight="10.0" prefHeight="34.199975585937494" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Password lenght">
+                           <GridPane.margin>
+                              <Insets />
+                           </GridPane.margin>
+                        </Label>
+                        <Label alignment="TOP_RIGHT" prefHeight="114.0" prefWidth="100.0" text="Include" GridPane.rowIndex="1" />
+                        <Label text="Additional Options" GridPane.rowIndex="3" />
+                        <TextField prefHeight="7.0" prefWidth="490.0" promptText="Password Lenght" styleClass="pass-len-field" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" />
+                        <GridPane hgap="5.0" styleClass="grid-pane-options" stylesheets="@../../../CSS/style.css" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.26663208007812" minWidth="10.0" prefWidth="60.266665649414065" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.8000205993652" minWidth="10.0" prefWidth="426.93333435058594" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <CheckBox mnemonicParsing="false" selected="true" text="Numbers" GridPane.columnIndex="1" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="Lower-case Characters" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <CheckBox mnemonicParsing="false" selected="true" text="Upper-case Characters" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label alignment="CENTER" prefHeight="18.0" prefWidth="89.0" text="Symbols:" textAlignment="CENTER" GridPane.rowIndex="3" />
+                              <TextField prefHeight="26.0" prefWidth="269.0" promptText="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                           </children>
+                        </GridPane>
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Quantity" GridPane.rowIndex="2" />
+                        <TextField promptText="Quantity of password to be generated" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <GridPane hgap="5.0" styleClass="grid-pane" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <CheckBox mnemonicParsing="false" text="No Duplicates" />
+                              <CheckBox mnemonicParsing="false" text="No Sequential" GridPane.columnIndex="1" />
+                           </children>
+                        </GridPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </GridPane>
+                  <Separator layoutX="4.0" layoutY="212.0" prefHeight="2.0" prefWidth="601.0" stylesheets="@../../../CSS/style.css" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="255.0" />
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bottom-container" stylesheets="@../../../CSS/style.css" />
+        </items>
+      </SplitPane>
+      <Button fx:id="closeButton" defaultButton="true" layoutX="578.0" layoutY="6.0" mnemonicParsing="false" onAction="#closeActionEvent" prefHeight="10.0" prefWidth="10.0" styleClass="close-button" stylesheets="@../../../CSS/style.css" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <graphic>
+            <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../IMG/window-close.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <padding>
+            <Insets bottom="2.0" left="15.0" right="15.0" top="2.0" />
+         </padding>
+      </Button>
+      <MenuBar id="menu-container" fx:id="menuBar" layoutY="57.0" prefHeight="51.0" prefWidth="655.0" styleClass="menu-container" stylesheets="@../../../CSS/style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
+         <menus>
+            <Menu id="sub-menu" mnemonicParsing="false" text="File">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="New" />
+                  <MenuItem mnemonicParsing="false" text="Import" />
+                  <MenuItem mnemonicParsing="false" text="Export" />
+               </items>
+            </Menu>
+            <Menu id="sub-menu" mnemonicParsing="false" text="About" />
+         </menus>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
+         </padding>
+      </MenuBar>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="22.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="3.0">
+         <image>
+            <Image url="@../../../IMG/fav-icon.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="48.0" layoutY="8.0" text="Password Generator" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="6.0" />
+   </children>
+</AnchorPane>
