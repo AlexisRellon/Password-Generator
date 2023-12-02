@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -35,14 +34,14 @@
                       <RowConstraints maxHeight="61.20000305175782" minHeight="10.0" prefHeight="34.199975585937494" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Password lenght">
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Password length">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Label>
                         <Label alignment="TOP_RIGHT" prefHeight="114.0" prefWidth="100.0" text="Include" GridPane.rowIndex="1" />
                         <Label text="Additional Options" GridPane.rowIndex="3" />
-                        <TextField prefHeight="7.0" prefWidth="490.0" promptText="Password Lenght" styleClass="pass-len-field" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" />
+                        <TextField prefHeight="7.0" prefWidth="490.0" promptText="Password Length" styleClass="pass-len-field" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" />
                         <GridPane hgap="5.0" styleClass="grid-pane-options" stylesheets="@../../../CSS/style.css" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.26663208007812" minWidth="10.0" prefWidth="60.266665649414065" />
@@ -82,7 +81,6 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                   </GridPane>
-                  <Separator layoutX="4.0" layoutY="212.0" prefHeight="2.0" prefWidth="601.0" stylesheets="@../../../CSS/style.css" AnchorPane.leftAnchor="4.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="255.0" />
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bottom-container" stylesheets="@../../../CSS/style.css" />
         </items>
