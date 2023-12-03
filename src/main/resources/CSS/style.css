@@ -1,8 +1,8 @@
 /*Global Style*/
 * {
-    -fx-font-family: "Calibri Light";
-    -fx-font-size: 13px;
-    -fx-background-color: #212121;
+    /*-fx-font-family: "Roboto";*/
+    -fx-font-size: 10px;
+    /*-fx-background-color: #212121;*/
     -fx-text-fill: #FAFAFF;
 }
 
@@ -36,7 +36,7 @@
     -fx-background-color: #e86a5c;
 }
 
-/*Menu Style*/
+/* Menu Style */
 .menu-container {
     -fx-background-color: #212121;
     -fx-border-width: 1px 0 1px 0;
@@ -48,29 +48,32 @@
     -fx-padding: 5px 1.25em;
 }
 
-
 .menu-container .menu:hover {
     -fx-background-color: #313133;
     -fx-background-radius: 10px;
 }
-.menu-container .menu:pressed {
-    -fx-background-color: #3a3a3b;
+
+.menu-container .menu:focused {
+    -fx-background-color: #313133;
+    -fx-background-radius: 10px;
 }
 
+/* Menu Items */
 .menu-container .menu .menu-item {
     -fx-background-color: #171717;
+    -fx-padding: 5px 1.25em;
+    -fx-text-fill: #FAFAFF;
 }
 
 .menu-container .menu .menu-item:hover {
     -fx-background-color: #313133;
 }
-.menu-container .menu .menu-item:pressed {
-    -fx-background-color: #3a3a3b;
+
+/* Entire Dropdown */
+.context-menu {
+    -fx-background-color: #313133;
 }
 
-.menu-container .menu .menu-item .label:hover {
-    -fx-background-color: #26272a;
-}
 
 /*Container Style*/
 .split-container {
@@ -101,13 +104,14 @@
 }
 
 /*Check box styles*/
+
 /* Checked state */
-.check-box {
-    -fx-background-color: transparent;
+.check-box .box {
+    -fx-background-color: #212121;
 }
 
 .check-box .box .mark {
-    -fx-background-color: #212121;
+    -fx-background-color: transparent;
 }
 
 .check-box:selected .box .mark {
@@ -133,4 +137,87 @@
 
 .pass-len-field > .label {
     -fx-background-color: transparent;
+}
+
+/* Button Styles*/
+.other-buttons, .button-generate {
+    -fx-padding: 5px 10px;
+    -fx-background-color: #212121;
+    -fx-background-radius: 100px;
+    -fx-border-radius: 100px;
+    -fx-border-width: 0;
+}
+.other-buttons:hover {
+    -fx-background-color: #06BEE1;
+    -fx-text-fill: #212121;
+}
+
+.button-generate {
+    -fx-background-color: #212121;
+    -fx-text-fill: #FAFAFF;
+    -fx-border-width: 1;
+    -fx-border-color: #06BEE1;
+}
+
+.button-generate:hover {
+    -fx-border-width: 1;
+    -fx-background-color: #06BEE1;
+    -fx-text-fill: #212121;
+}
+
+.button-generate:pressed, .other-buttons:pressed {
+    -fx-background-color: #0599b2;
+    -fx-border-color: transparent;
+}
+
+/* Table Style */
+.table-view {
+    -fx-background-color: #333333;
+    -fx-background-radius: 5;
+}
+
+.table-view .column-header-background {
+    -fx-background-color: #333333;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.166667em 0.416667em 0.25em 0.416667em;
+}
+
+/* Customize TableView Scrollbar */
+.table-view .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:horizontal {
+    -fx-padding: 0.25em 0.05em 0.25em 0.05em;
+}
+
+.table-view .scroll-bar:vertical {
+    -fx-padding: 0.05em 0.25em 0.05em 0.25em;
+}
+
+.table-view .scroll-bar-track {
+    -fx-background-color: transparent;
+}
+
+/* Scroll Bar*/
+.table-view *.scroll-bar:horizontal *.increment-button,
+.table-view *.scroll-bar:horizontal *.decrement-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+}
+
+.table-view *.scroll-bar:horizontal *.increment-arrow,
+.table-view *.scroll-bar:horizontal *.decrement-arrow {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-padding: 0;
+    -fx-shape: null;
+}
+
+/* Table Cell Style */
+.table-view .table-row-cell {
+    -fx-background-color: #414141;
 }

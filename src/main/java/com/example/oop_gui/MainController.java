@@ -1,7 +1,11 @@
 package com.example.oop_gui;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.AccessibleAttribute;
 import javafx.scene.control.*;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
@@ -13,6 +17,7 @@ import java.util.logging.Logger;
 
 public class MainController {
 
+    //JavaFX Components
     @FXML
     private AnchorPane display;
     @FXML
@@ -30,6 +35,8 @@ public class MainController {
         // Set up event handlers
         display.setOnMousePressed(this::onMousePressedHandler);
         display.setOnMouseDragged(this::onMouseDraggedHandler);
+        checkboxSymbols.setOnAction(this::onChkBoxSymbolsActions);
+        removeScrollBar(tableOutputs);
     }
 
     @FXML
