@@ -14,7 +14,7 @@ Human-generated passwords tend to be reused or slightly modified for convenience
 Random passwords are more diverse and unlikely to be repeated, which reduces the exposure and impact of a potential breach.
 3. **Convenience**: They are easier to manage and store with a password manager or a clipboard. 
 Human-generated passwords can be hard to remember or type, especially if they are long or complex. 
-Random passwords can be easily generated, copied, and pasted with a program or a tool, such as Random Password Generator or Pyperclip, which saves time and effort for the user.
+Random passwords can be easily generated, copied, and pasted with a program or a tool, such as Random Password Generator which saves time and effort for the user.
 ---
 
 # Installation and Usage
@@ -55,5 +55,5 @@ You can also report bugs or suggest new features by creating an issue on the [is
 
 # Programmers on this project:
 * Alexis John Rellon - Frontend and Backend developer
-* Prince Lacsa - Programmer
+* Stephen Prince Lacsa - Programmer
 * Louis Clark Barbuco - Programmer
