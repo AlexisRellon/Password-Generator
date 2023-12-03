@@ -55,5 +55,5 @@ You can also report bugs or suggest new features by creating an issue on the [is
 
 # Programmers on this project:
 * Alexis John Rellon - Frontend and Backend developer
-* Stephen Prince Lacsa - Programmer
+* Prince Stephen Lacsa - Programmer
 * Louis Clark Barbuco - Programmer
