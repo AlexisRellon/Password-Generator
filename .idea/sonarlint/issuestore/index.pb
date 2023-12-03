@@ -3,8 +3,6 @@
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 N
 src/main/java/module-info.java,1\c\1c89a5491fbfda3fb050196d6a239f20200296e7
-u
-Esrc/main/java/com/example/oop_gui/methods/GenerateStringPassword.java,7\c\7cd251e9ab68b8f347a5f8d840a1474b93a7341b
 f
 6src/main/java/com/example/oop_gui/MainApplication.java,6\2\62bd3a3d4e931fed5de730fd6d58961ec0136b3f
 e
@@ -208,8 +206,6 @@ Q.idea/sonarlint/securityhotspotstore/a/e/ae9ddf453f55affea2d6b9e3973cac1eb2efb4
 Q.idea/sonarlint/securityhotspotstore/3/0/30f9777ea696a18aa49d3e9967e93a4276065227,7\4\74a0e90fa145d4cf4f2495c6a426d2628d6f6ea6
 Å
 Q.idea/sonarlint/securityhotspotstore/f/0/f0e0f9cec86fe4b939ae22be5264c758801eb28f,f\c\fc51aad2f1ebe72ffedf49fa3dfea24b513ff6fe
-g
-7src/main/java/com/example/oop_gui/GeneratePassword.java,b\c\bca41d15c8c72487e4fa4227316425c9f02c5d9e
 P
  src/main/resources/CSS/style.css,a\0\a00661ec04e9aa6dd774354bc48aca0776e1ea65
 w
@@ -3662,3 +3658,5 @@ Q.idea/sonarlint/securityhotspotstore/9/3/9306582f2c5632b337a73566f568cb4efe29af
 Q.idea/sonarlint/securityhotspotstore/f/a/fa60f4eca7a2c31f595361737d644493b4add6a7,4\d\4d09568de0a635b10b9f074ed38fb99e099dc7d4
 Å
 Q.idea/sonarlint/securityhotspotstore/f/e/feea73c0ad2c5c55846ad2593f62244babd32b74,f\a\fa719aab96b59cee0a8dd41d5e4f569e13980978
+9
+	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d

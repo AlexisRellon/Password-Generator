@@ -33,7 +33,24 @@
 }
 
 .close-button:pressed {
-    -fx-background-color: #e86a5c;
+    -fx-background-color: #f6696b;
+}
+
+/*Minimize Button Styles*/
+.minimize-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-translate-z: -1;
+}
+
+.minimize-button:hover {
+    -fx-background-color: #474747;
+    -fx-background-radius: 0;
+    -fx-translate-z: -1;
+}
+
+.minimize-button:pressed {
+    -fx-background-color: #333333;
 }
 
 /* Menu Style */

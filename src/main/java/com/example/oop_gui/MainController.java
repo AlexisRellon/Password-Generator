@@ -6,14 +6,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.AccessibleAttribute;
+import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.security.SecureRandom;
-import java.util.Random;
+import java.util.*;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class MainController {
 
@@ -24,6 +26,8 @@ public class MainController {
     private MenuBar menuBar;
     @FXML
     private Button closeButton;
+    @FXML
+    private Button minimizeButton;
 
     //Variables
     private double xOffset = 0;
@@ -37,6 +41,12 @@ public class MainController {
         display.setOnMouseDragged(this::onMouseDraggedHandler);
         checkboxSymbols.setOnAction(this::onChkBoxSymbolsActions);
         removeScrollBar(tableOutputs);
+    }
+
+    @FXML
+    private void minimizeActionEvent(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true); // Minimize the window
     }
 
     @FXML
@@ -116,7 +126,6 @@ public class MainController {
     private void onGenerateBtnPressed(ActionEvent event) {
         try {
             String length = passwordLenField.getText();
-
             int passwordLength = Integer.parseInt(length);
 
             if (checkboxNumbers.isSelected()) allowedCharacters.append(getNumbersCharacters());
@@ -126,10 +135,10 @@ public class MainController {
                 allowedCharacters.append(symbolsField.getText());
             }
 
-            if (passwordLength > 1) {
-                generatePasswordToTable(passwordLength);
-                allowedCharacters.setLength(0);
-            }
+            ObservableList<String> passwords = generatePasswordToTable(passwordLength);
+            addPasswordsToTable(passwords);
+
+            allowedCharacters.setLength(0);
 
         } catch (NumberFormatException exception) {
             log.info("Must Contain a Value");
@@ -138,26 +147,23 @@ public class MainController {
         }
     }
 
-    private void generatePasswordToTable(int passwordLength) {
+    private ObservableList<String> generatePasswordToTable(int passwordLength) {
         ObservableList<String> passwords = FXCollections.observableArrayList();
 
         int quantity = 1;
         if (quantityField.getText().isEmpty()) {
             String password = generateRandomPassword(passwordLength);
-
             passwords.add(password);
-        }
-        else {
+        } else {
             quantity = Integer.parseInt(quantityField.getText());
-
-            for(int count = 0; count < quantity; count++){
+            for (int count = 0; count < quantity; count++) {
                 String password = generateRandomPassword(passwordLength);
-
                 passwords.add(password);
+                log.info(password + "len: " + password.length());
             }
         }
 
-        addPasswordsToTable(passwords);
+        return passwords;
     }
 
     @FXML
@@ -166,8 +172,7 @@ public class MainController {
         symbolsField.setDisable(!isSymbolsSelected);
         if (!isSymbolsSelected) symbolsField.clear();
     }
-    /*
-    To be Implemented
+
     @FXML
     private void onCopyFirstLineActions(ActionEvent event) {
 
@@ -176,22 +181,67 @@ public class MainController {
     private void onCopyAllActions(ActionEvent event) {
 
     }
-     */
-
 
     //User Defined methods
+    private String shuffleSequentialChars(String password) {
+        StringBuilder result = new StringBuilder();
+        StringBuilder sequentialChars = new StringBuilder();
+
+        for (char c : password.toCharArray()) {
+            if (Character.isAlphabetic(c)) {
+                if (sequentialChars.length() > 0 && sequentialChars.charAt(sequentialChars.length() - 1) != c - 1) {
+                    result.append(shuffleString(sequentialChars.toString()));
+                    sequentialChars.setLength(0);
+                }
+                sequentialChars.append(c);
+            } else {
+                if (sequentialChars.length() > 0) {
+                    result.append(shuffleString(sequentialChars.toString()));
+                    sequentialChars.setLength(0);
+                }
+                result.append(c);
+            }
+        }
+
+        if (sequentialChars.length() > 0) {
+            result.append(shuffleString(sequentialChars.toString()));
+        }
+
+        return result.toString();
+    }
+
+    private String shuffleString(String input) {
+        List<Character> characters = input.chars().mapToObj(e -> (char) e).collect(Collectors.toList());
+        Collections.shuffle(characters);
+        return characters.stream().map(String::valueOf).collect(Collectors.joining());
+    }
+
     private String generateRandomPassword(int length) {
         Random random = new SecureRandom();
         var passwordBuilder = new StringBuilder();
 
-        for (int i=0; i < length; i++) {
-            int randomIndex = random.nextInt(allowedCharacters.length());
+        // Used to check for duplicates
+        Set<Character> usedCharacters = new HashSet<>();
 
-            passwordBuilder.append(allowedCharacters.charAt(randomIndex));
+        // Generate the password according to the checkboxes
+        while (passwordBuilder.length() < length) {
+            int randomIndex = random.nextInt(allowedCharacters.length());
+            char character = allowedCharacters.charAt(randomIndex);
+
+            if (!checkboxDuplicates.isSelected() || !usedCharacters.contains(character)) {
+                passwordBuilder.append(character);
+                usedCharacters.add(character);
+            }
+        }
+
+        // Apply shuffling for sequential characters if selected
+        if (checkboxSequential.isSelected()) {
+            return shuffleSequentialChars(passwordBuilder.toString());
         }
 
         return passwordBuilder.toString();
     }
+
 
     private void addPasswordsToTable(ObservableList<String> passwords) {
         TableColumn<String, String> passwordColumnField = (TableColumn<String, String>) tableOutputs.getColumns().get(0);
