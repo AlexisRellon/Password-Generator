@@ -1,37 +1,41 @@
 package com.example.oop_gui;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.AccessibleAttribute;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.security.SecureRandom;
 import java.util.*;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class MainController {
 
     //JavaFX Components
-    @FXML
-    private AnchorPane display;
-    @FXML
-    private MenuBar menuBar;
-    @FXML
-    private Button closeButton;
-    @FXML
-    private Button minimizeButton;
+    @FXML private AnchorPane display;
+    @FXML private Button closeButton;
+    @FXML private SplitPane contentWindow;
+    @FXML private MenuBar menuBar;
 
     //Variables
     private double xOffset = 0;
     private double yOffset = 0;
+    private int counter = 0;
 
 
     @FXML
@@ -39,25 +43,36 @@ public class MainController {
         // Set up event handlers
         display.setOnMousePressed(this::onMousePressedHandler);
         display.setOnMouseDragged(this::onMouseDraggedHandler);
+        menuBar.setOnMouseDragged(this::onMouseDraggedHandler);
+        menuBar.setOnMousePressed(this::onMousePressedHandler);
+
+        display.addEventFilter(KeyEvent.KEY_PRESSED, event -> {
+            if(event.getCode() == KeyCode.ENTER) event.consume();
+        });
+
         checkboxSymbols.setOnAction(this::onChkBoxSymbolsActions);
-        removeScrollBar(tableOutputs);
+        passwordLenField.addEventFilter(KeyEvent.KEY_TYPED, this::consumeNonNumericKeys);
+        quantityField.addEventFilter(KeyEvent.KEY_TYPED, this::consumeNonNumericKeys);
     }
 
-    @FXML
-    private void minimizeActionEvent(ActionEvent event) {
+    @FXML private void consumeNonNumericKeys(KeyEvent event) {
+        if (!Character.isDigit(event.getCharacter().charAt(0))) {
+            event.consume();
+        }
+    }
+
+    @FXML private void minimizeActionEvent(ActionEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true); // Minimize the window
     }
 
-    @FXML
-    private void onMousePressedHandler(MouseEvent event) {
+    @FXML private void onMousePressedHandler(MouseEvent event) {
         // Get the initial mouse cursor position relative to the scene
         xOffset = event.getSceneX();
         yOffset = event.getSceneY();
     }
 
-    @FXML
-    private void onMouseDraggedHandler(MouseEvent event) {
+    @FXML private void onMouseDraggedHandler(MouseEvent event) {
         // Calculate the new window position based on the mouse movement
         double x = event.getScreenX() - xOffset;
         double y = event.getScreenY() - yOffset;
@@ -67,8 +82,7 @@ public class MainController {
         display.getScene().getWindow().setY(y);
     }
 
-    @FXML
-    private void closeActionEvent(ActionEvent event) {
+    @FXML private void closeActionEvent() {
         Stage stage = (Stage) closeButton.getScene().getWindow();
         stage.close();
     }
@@ -78,52 +92,68 @@ public class MainController {
      */
 
     // Components for text-fields
-    @FXML
-    private TextField passwordLenField;
-    @FXML
-    private TextField symbolsField;
-    @FXML
-    private TextField quantityField;
+    @FXML private TextField passwordLenField;
+    @FXML private TextField symbolsField;
+    @FXML private TextField quantityField;
 
     // Components: CheckBox
-    @FXML
-    private CheckBox checkboxNumbers;
-    @FXML
-    private CheckBox checkboxLowerCase;
-    @FXML
-    private CheckBox checkboxUpperCase;
-    @FXML
-    private CheckBox checkboxSymbols;
-    @FXML
-    private CheckBox checkboxDuplicates;
-    @FXML
-    private CheckBox checkboxSequential;
+    @FXML private CheckBox checkboxNumbers;
+    @FXML private CheckBox checkboxLowerCase;
+    @FXML private CheckBox checkboxUpperCase;
+    @FXML private CheckBox checkboxSymbols;
+    @FXML private CheckBox checkboxDuplicates;
+    @FXML private CheckBox checkboxSequential;
 
-    //Components: Table
-    @FXML
-    private TableView<String> tableOutputs;
-    @FXML
-    private TableColumn<String, String> passwordColumn;
+    //Component: TextArea
+    @FXML private TextArea passwordTxtArea;
 
-    // Components: Buttons
-    @FXML
-    private Button generateBtn;
-    @FXML
-    private Button copyFirstLineBtn;
-    @FXML
-    private Button copyAllBtn;
+    //Components: Labels
+    @FXML private Label windowTitle;
 
 
     //Global Variables
-    Logger log = Logger.getLogger(getClass().getName());
     private static final String UPPERCASE_CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     private static final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String NUMBER_CHARACTERS = "1234567890";
-    StringBuilder allowedCharacters = new StringBuilder();
+    private final StringBuilder allowedCharacters = new StringBuilder();
+//    private final StringBuilder allPasswords = new StringBuilder();
 
     //Methods
-    @FXML
-    private void onGenerateBtnPressed(ActionEvent event) {
+    @FXML private void showAboutPopUp() {
+        try {
+            // Load the FXML file for the About Dialog
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("About.fxml"));
+            Parent root = (Parent) loader.load();
+
+            // Create a new stage for the About Dialog
+            Stage stage = new Stage();
+            stage.setTitle("About");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+
+            // Get the controller of the About Dialog
+            AboutController aboutController = loader.getController();
+
+            // Set the message
+            String message = new StringBuilder()
+                    .append("About this program\n\n\n")
+                    .append("This application generates secure passwords based on user-defined criteria.\n\n")
+                    .append("It utilizes various parameters such as length, character types (uppercase, lowercase, numbers, symbols), ")
+                    .append("and options to prevent duplicate or sequential characters.")
+                    .toString();
+
+            // Set the message in the About Dialog controller
+            aboutController.setDescription(message);
+
+            // Show the About Dialog
+            stage.showAndWait();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }
+
+    @FXML private void onGenerateBtnPressed() {
         try {
             String length = passwordLenField.getText();
             int passwordLength = Integer.parseInt(length);
@@ -135,54 +165,171 @@ public class MainController {
                 allowedCharacters.append(symbolsField.getText());
             }
 
-            ObservableList<String> passwords = generatePasswordToTable(passwordLength);
-            addPasswordsToTable(passwords);
+            if (isNoneSelectedOnCheckBox(checkboxNumbers, checkboxLowerCase, checkboxUpperCase, checkboxSymbols)) {
+                // Handle scenario where no character options are selected
+                passwordTxtArea.setPromptText("Select at least one character option");
+                return; // Exit the method to prevent further execution
+            }
 
+            StringBuilder generatedPasswords = new StringBuilder();
+
+            int quantity = (
+                    (quantityField.getText().isEmpty())
+                    ? 1 // Default Value
+                    : Integer.parseInt(quantityField.getText()) // User-defined value
+                    );
+
+            for (int i = 0; i < quantity; i++) {
+                String password = generateRandomPassword(passwordLength);
+                generatedPasswords.append(password).append(System.lineSeparator());
+            }
+
+            // Set generated passwords to the TextArea
+            passwordTxtArea.setText(generatedPasswords.toString());
             allowedCharacters.setLength(0);
 
         } catch (NumberFormatException exception) {
-            log.info("Must Contain a Value");
             passwordLenField.setPromptText("Enter a value");
             passwordLenField.focusedProperty();
         }
     }
 
-    private ObservableList<String> generatePasswordToTable(int passwordLength) {
-        ObservableList<String> passwords = FXCollections.observableArrayList();
-
-        int quantity = 1;
-        if (quantityField.getText().isEmpty()) {
-            String password = generateRandomPassword(passwordLength);
-            passwords.add(password);
-        } else {
-            quantity = Integer.parseInt(quantityField.getText());
-            for (int count = 0; count < quantity; count++) {
-                String password = generateRandomPassword(passwordLength);
-                passwords.add(password);
-                log.info(password + "len: " + password.length());
-            }
-        }
-
-        return passwords;
-    }
-
-    @FXML
-    private void onChkBoxSymbolsActions(ActionEvent event) {
+    @FXML private void onChkBoxSymbolsActions(ActionEvent event) {
         boolean isSymbolsSelected = checkboxSymbols.isSelected();
         symbolsField.setDisable(!isSymbolsSelected);
         if (!isSymbolsSelected) symbolsField.clear();
     }
 
-    @FXML
-    private void onCopyFirstLineActions(ActionEvent event) {
+    @FXML private void onCopyFirstLineActions() {
+        String content = passwordTxtArea.getText();
+        String[] lines = content.split("\\R"); // Split by any line break
 
+        if (lines.length > 0) {
+            String firstLine = lines[0]; // Retrieve the first line
+
+            // Access the System clipboard
+            Clipboard clipboard = Clipboard.getSystemClipboard();
+            // Set the content on the Clipboard of the system
+            ClipboardContent clipboardContent = new ClipboardContent();
+            clipboardContent.putString(firstLine); // Get the first line
+            clipboard.setContent(clipboardContent);
+        }
     }
-    @FXML
-    private void onCopyAllActions(ActionEvent event) {
+    @FXML private void onCopyAllActions() {
+        String content = passwordTxtArea.getText();
+        if (!content.isEmpty()) {
+            // Access the System clipboard
+            Clipboard clipboard = Clipboard.getSystemClipboard();
+            // Set the content on the Clipboard of the system
+            ClipboardContent clipboardContent = new ClipboardContent();
+            clipboardContent.putString(content);
+            clipboard.setContent(clipboardContent);
+        }
+    }
 
+    // Import and Export file (File handler)
+    @FXML private void setCmdImport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select File to Import");
+
+        // Set extension filters if needed
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show open file dialog
+        Stage stage = (Stage) display.getScene().getWindow();
+        File file = fileChooser.showOpenDialog(stage);
+
+        if (file != null) {
+            try {
+                String filename = file.getName();
+                List<String> lines = Files.readAllLines(file.toPath());
+                StringBuilder importedPasswords = new StringBuilder();
+
+                // Appending all lines to the StringBuilder
+                lines.forEach(line -> importedPasswords.append(line).append(System.lineSeparator()));
+
+                // Set imported text to the TextArea
+                passwordTxtArea.setText(importedPasswords.toString());
+                windowTitle.setText(filename);
+                stage.setTitle(filename);
+            } catch (IOException e) {
+                showAlertDialog("Error Importing File", "An error occurred while importing the file.");
+                e.printStackTrace();
+            }
+        }
+    }
+    @FXML private void setCmdExport() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save File As");
+
+        // Set extension filters if needed
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file dialog
+        Stage stage = (Stage) display.getScene().getWindow();
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null) {
+            try {
+                writePasswordsToFile(file);
+            } catch (IOException e) {
+                showAlertDialog("Error Exporting File", "An error occurred while exporting the file.");
+            }
+        }
+    }
+
+    private void writePasswordsToFile(File file) throws IOException {
+        Stage stage = (Stage) display.getScene().getWindow();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            String filename = file.getName();
+            String content = passwordTxtArea.getText(); // Get the content from the TextArea
+
+            writer.write(content);
+            windowTitle.setText(filename);
+            stage.setTitle(filename);
+        }
+    }
+    private void showAlertDialog(String title, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    @FXML private void setCmdNew() {
+        Stage stage = (Stage) display.getScene().getWindow();
+        String title = "New File (" + (++counter) + ")";
+
+        // Clear the table contents by clearing the items in the ObservableList
+        passwordTxtArea.setText("");
+
+        uncheckAllCheckBox();
+        setTextToEmpty();
+        windowTitle.setText(title);
+        stage.setTitle(title);
     }
 
     //User Defined methods
+
+    private void uncheckAllCheckBox () {
+        for(CheckBox checkboxes : Arrays.asList(checkboxNumbers, checkboxLowerCase,
+                checkboxUpperCase, checkboxSymbols, checkboxDuplicates,
+                checkboxSequential))
+        {
+            checkboxes.setSelected(false);
+        }
+    }
+
+    private void setTextToEmpty() {
+        for(TextField textfields : Arrays.asList(passwordLenField, quantityField, symbolsField)) {
+            textfields.setText("");
+        }
+        symbolsField.setDisable(true);
+    }
+    
     private String shuffleSequentialChars(String password) {
         StringBuilder result = new StringBuilder();
         StringBuilder sequentialChars = new StringBuilder();
@@ -225,6 +372,7 @@ public class MainController {
 
         // Generate the password according to the checkboxes
         while (passwordBuilder.length() < length) {
+
             int randomIndex = random.nextInt(allowedCharacters.length());
             char character = allowedCharacters.charAt(randomIndex);
 
@@ -242,14 +390,16 @@ public class MainController {
         return passwordBuilder.toString();
     }
 
+    private boolean isNoneSelectedOnCheckBox(CheckBox checkboxNumbers,
+                                             CheckBox checkboxLowerCase,
+                                             CheckBox checkboxUpperCase,
+                                             CheckBox checkboxSymbols) {
+        return !(checkboxNumbers.isSelected() ||
+                checkboxLowerCase.isSelected() ||
+                checkboxUpperCase.isSelected() ||
+                checkboxSymbols.isSelected());
 
-    private void addPasswordsToTable(ObservableList<String> passwords) {
-        TableColumn<String, String> passwordColumnField = (TableColumn<String, String>) tableOutputs.getColumns().get(0);
-        passwordColumnField.setCellValueFactory(data -> new SimpleStringProperty(data.getValue()));
-
-        tableOutputs.setItems(passwords);
     }
-
 
     // Getter-Setter Methods
     public String getUppercaseLetters() {
@@ -262,22 +412,5 @@ public class MainController {
 
     public String getNumbersCharacters() {
         return NUMBER_CHARACTERS;
-    }
-
-
-    public static <T extends Control> void removeScrollBar(T table) {
-        ScrollBar scrollBar = (ScrollBar) table.queryAccessibleAttribute(AccessibleAttribute.HORIZONTAL_SCROLLBAR);
-        /*
-         *This null-check is for safety reasons if you are using when the table's skin isn't yet initialized.
-         * If you use this method in a custom skin you wrote, where you @Override the layoutChildren method,
-         * use it there, and it should be always initialized, so null-check would be unnecessary.
-         *
-         */
-        if (scrollBar != null) {
-            scrollBar.setPrefHeight(0);
-            scrollBar.setMaxHeight(0);
-            scrollBar.setOpacity(1);
-            scrollBar.setVisible(false); // If you want to keep the scrolling functionality then delete this row.
-        }
     }
 }

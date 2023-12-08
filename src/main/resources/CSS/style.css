@@ -27,13 +27,13 @@
 }
 
 .close-button:hover {
-    -fx-background-color: #F2545B;
+    -fx-background-color: #e81123;
     -fx-background-radius: 0;
     -fx-translate-z: -1;
 }
 
 .close-button:pressed {
-    -fx-background-color: #f6696b;
+    -fx-background-color: #ff6062;
 }
 
 /*Minimize Button Styles*/
@@ -135,7 +135,7 @@
     -fx-background-color: rgba(6, 190, 225, 0.8);
 }
 
-/*Input fields style*/
+/*Input fields style */
 .pass-len-field > .text-field {
     -fx-background-color: #8a8a8a;
     -fx-background-radius: 5;
@@ -156,7 +156,7 @@
     -fx-background-color: transparent;
 }
 
-/* Button Styles*/
+/* Button Styles */
 .other-buttons, .button-generate {
     -fx-padding: 5px 10px;
     -fx-background-color: #212121;
@@ -187,54 +187,16 @@
     -fx-border-color: transparent;
 }
 
-/* Table Style */
-.table-view {
-    -fx-background-color: #333333;
-    -fx-background-radius: 5;
+/* Text Field Style */
+.text-field:focused {
+    -fx-border-width: 1;
+    -fx-border-color: #06BEE1;
+    -fx-border-radius: 3;
 }
 
-.table-view .column-header-background {
-    -fx-background-color: #333333;
-    -fx-background-insets: 0, 0 0 1 0;
-    -fx-padding: 0.166667em 0.416667em 0.25em 0.416667em;
-}
-
-/* Customize TableView Scrollbar */
-.table-view .scroll-bar {
-    -fx-background-color: transparent;
-}
-
-.table-view .scroll-bar:horizontal {
-    -fx-padding: 0.25em 0.05em 0.25em 0.05em;
-}
-
-.table-view .scroll-bar:vertical {
-    -fx-padding: 0.05em 0.25em 0.05em 0.25em;
-}
-
-.table-view .scroll-bar-track {
-    -fx-background-color: transparent;
-}
-
-/* Scroll Bar*/
-.table-view *.scroll-bar:horizontal *.increment-button,
-.table-view *.scroll-bar:horizontal *.decrement-button {
-    -fx-background-color: null;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-}
-
-.table-view *.scroll-bar:horizontal *.increment-arrow,
-.table-view *.scroll-bar:horizontal *.decrement-arrow {
-    -fx-background-color: null;
-    -fx-background-radius: 0;
-    -fx-background-insets: 0;
-    -fx-padding: 0;
-    -fx-shape: null;
-}
-
-/* Table Cell Style */
-.table-view .table-row-cell {
-    -fx-background-color: #414141;
+/* Text Area Style */
+.password-txt-area {
+    -fx-control-inner-background: #5c5c5c;
+    -fx-text-fill: #FAFAFF;
+    -fx-prompt-text-fill: #ef5c63;
 }

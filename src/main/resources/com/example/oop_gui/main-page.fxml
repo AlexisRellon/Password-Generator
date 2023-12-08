@@ -8,9 +8,9 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -20,7 +20,7 @@
 
 <AnchorPane fx:id="display" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="630.0" minWidth="650.0" onMouseDragged="#onMouseDraggedHandler" onMousePressed="#onMousePressedHandler" prefHeight="664.0" prefWidth="650.0" styleClass="window" stylesheets="@../../../CSS/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.oop_gui.MainController">
    <children>
-      <SplitPane dividerPositions="0.6022556390977443" layoutX="-14.0" layoutY="51.0" orientation="VERTICAL" prefHeight="572.0" prefWidth="650.0" styleClass="split-container" stylesheets="@../../../CSS/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <SplitPane fx:id="contentWindow" dividerPositions="0.6022556390977443" layoutX="-14.0" layoutY="51.0" orientation="VERTICAL" prefHeight="572.0" prefWidth="650.0" styleClass="split-container" stylesheets="@../../../CSS/style.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="top-container" stylesheets="@../../../CSS/style.css">
                <children>
@@ -42,8 +42,11 @@
                            </GridPane.margin>
                         </Label>
                         <Label alignment="TOP_RIGHT" prefHeight="114.0" prefWidth="100.0" text="Include" GridPane.rowIndex="1" />
-                        <Label text="Additional Options" GridPane.rowIndex="3" />
-                        <TextField fx:id="passwordLenField" prefHeight="7.0" prefWidth="490.0" promptText="Password Length" styleClass="pass-len-field" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="100.0" text="Additional Options" GridPane.rowIndex="3" />
+                        <TextField fx:id="passwordLenField" prefHeight="7.0" prefWidth="490.0" promptText="Password Length" styleClass="pass-len-field" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1">
+                           <tooltip>
+                              <Tooltip text="The length of the password upon generating" />
+                           </tooltip></TextField>
                         <GridPane hgap="5.0" styleClass="grid-pane-options" stylesheets="@../../../CSS/style.css" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.26663208007812" minWidth="10.0" prefWidth="59.20000381469727" />
@@ -60,11 +63,17 @@
                               <CheckBox fx:id="checkboxLowerCase" mnemonicParsing="false" selected="true" text="Lower-case Characters" translateX="-63.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <CheckBox fx:id="checkboxUpperCase" mnemonicParsing="false" selected="true" text="Upper-case Characters" translateX="-63.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <CheckBox fx:id="checkboxSymbols" mnemonicParsing="false" selected="true" text="Symbols" GridPane.rowIndex="3" />
-                              <TextField fx:id="symbolsField" prefHeight="26.0" prefWidth="359.0" promptText="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" text="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                              <TextField fx:id="symbolsField" prefHeight="26.0" prefWidth="359.0" promptText="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" text="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <tooltip>
+                                    <Tooltip text="Symbols to be added in the password" />
+                                 </tooltip></TextField>
                            </children>
                         </GridPane>
                         <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Quantity" GridPane.rowIndex="2" />
-                        <TextField fx:id="quantityField" promptText="Quantity of password to be generated. Default: 1" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="quantityField" promptText="Default is 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <tooltip>
+                              <Tooltip text="Quantity of password to be generated" />
+                           </tooltip></TextField>
                         <GridPane hgap="5.0" styleClass="grid-pane" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -104,18 +113,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bottom-container" stylesheets="@../../../CSS/style.css">
                <children>
                   <Label layoutX="14.0" layoutY="14.0" text="Outputs" AnchorPane.leftAnchor="14.0" />
-                  <TableView fx:id="tableOutputs" editable="true" fixedCellSize="25.0" layoutX="22.0" layoutY="43.2" prefHeight="150.0" prefWidth="562.0" styleClass="table-outputs" stylesheets="@../../../CSS/style.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="43.0">
-                     <columns>
-                        <TableColumn fx:id="passwordColumn" editable="false" prefWidth="575.199999332428" resizable="false" style="-fx-background-color: #222;" text="Passwords" />
-                        <TableColumn prefWidth="75.0" text="Column X" />
-                     </columns>
-                     <columnResizePolicy>
-                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                     </columnResizePolicy>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
-                  </TableView>
+                  <TextArea fx:id="passwordTxtArea" layoutX="-19.0" layoutY="2.0" prefHeight="150.0" prefWidth="560.0" styleClass="password-txt-area" stylesheets="@../../../CSS/style.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="40.0" />
                </children></AnchorPane>
         </items>
       </SplitPane>
@@ -147,12 +145,15 @@
          <menus>
             <Menu id="sub-menu" mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" text="New" />
-                  <MenuItem mnemonicParsing="false" text="Import" />
-                  <MenuItem mnemonicParsing="false" text="Export" />
+                  <MenuItem fx:id="cmdNew" mnemonicParsing="false" onAction="#setCmdNew" text="New" />
+                  <MenuItem fx:id="cmdImport" mnemonicParsing="false" onAction="#setCmdImport" text="Import" />
+                  <MenuItem fx:id="cmdExport" mnemonicParsing="false" onAction="#setCmdExport" text="Export" />
                </items>
             </Menu>
-            <Menu id="sub-menu" mnemonicParsing="false" text="About" />
+            <Menu id="sub-menu" mnemonicParsing="false" text="About">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showAboutPopUp" text="About this Program" />
+               </items></Menu>
          </menus>
          <opaqueInsets>
             <Insets />
@@ -161,11 +162,12 @@
             <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
          </padding>
       </MenuBar>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="22.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="22.0" AnchorPane.topAnchor="3.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="22.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="3.0">
          <image>
             <Image url="@../../../IMG/fav-icon.png" />
          </image>
       </ImageView>
-      <Label layoutX="48.0" layoutY="8.0" text="Password Generator" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="9.0" />
+      <Label layoutX="48.0" layoutY="8.0" text="Password Generator" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="9.0" />
+      <Label id="windowTitle" fx:id="windowTitle" alignment="CENTER" layoutX="165.60000000000002" layoutY="16.0" prefHeight="15.0" prefWidth="320.0" text="New File" textAlignment="CENTER" AnchorPane.leftAnchor="165.0" AnchorPane.topAnchor="9.0" />
    </children>
 </AnchorPane>

@@ -16,6 +16,7 @@ public class MainApplication extends Application {
         Scene scene = new Scene(fxmlLoader.load());
 
         stage.initStyle(StageStyle.UNDECORATED);
+        stage.setTitle("Password Generator");
         stage.setScene(scene);
 
         stage.show();
