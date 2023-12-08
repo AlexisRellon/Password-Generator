@@ -115,7 +115,7 @@ public class MainController {
     private static final String LOWERCASE_CHARACTERS = "abcdefghijklmnopqrstuvwxyz";
     private static final String NUMBER_CHARACTERS = "1234567890";
     private final StringBuilder allowedCharacters = new StringBuilder();
-//    private final StringBuilder allPasswords = new StringBuilder();
+    private static final String WINDOW_TITLE = "Password Generator: ";
 
     //Methods
     @FXML private void showAboutPopUp() {
@@ -251,7 +251,7 @@ public class MainController {
                 // Set imported text to the TextArea
                 passwordTxtArea.setText(importedPasswords.toString());
                 windowTitle.setText(filename);
-                stage.setTitle(filename);
+                stage.setTitle(WINDOW_TITLE + filename);
             } catch (IOException e) {
                 showAlertDialog("Error Importing File", "An error occurred while importing the file.");
                 e.printStackTrace();
@@ -287,7 +287,7 @@ public class MainController {
 
             writer.write(content);
             windowTitle.setText(filename);
-            stage.setTitle(filename);
+            stage.setTitle(WINDOW_TITLE + filename);
         }
     }
     private void showAlertDialog(String title, String content) {
@@ -308,7 +308,7 @@ public class MainController {
         uncheckAllCheckBox();
         setTextToEmpty();
         windowTitle.setText(title);
-        stage.setTitle(title);
+        stage.setTitle(WINDOW_TITLE + title);
     }
 
     //User Defined methods

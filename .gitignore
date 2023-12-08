@@ -38,3 +38,7 @@ build/
 .DS_Store
 /.idea/sonarlint/
 /.idea/
+/jarconfig.xml
+/launch4j.log
+/Password Generator.iml
+/Password Generator.lnk
