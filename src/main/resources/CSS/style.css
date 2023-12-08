@@ -1,8 +1,8 @@
 /*Global Style*/
 * {
-    -fx-font-family: "Calibri Light";
-    -fx-font-size: 13px;
-    -fx-background-color: #212121;
+    /*-fx-font-family: "Roboto";*/
+    -fx-font-size: 10px;
+    /*-fx-background-color: #212121;*/
     -fx-text-fill: #FAFAFF;
 }
 
@@ -27,16 +27,33 @@
 }
 
 .close-button:hover {
-    -fx-background-color: #F2545B;
+    -fx-background-color: #e81123;
     -fx-background-radius: 0;
     -fx-translate-z: -1;
 }
 
 .close-button:pressed {
-    -fx-background-color: #e86a5c;
+    -fx-background-color: #ff6062;
 }
 
-/*Menu Style*/
+/*Minimize Button Styles*/
+.minimize-button {
+    -fx-background-color: null;
+    -fx-background-radius: 0;
+    -fx-translate-z: -1;
+}
+
+.minimize-button:hover {
+    -fx-background-color: #474747;
+    -fx-background-radius: 0;
+    -fx-translate-z: -1;
+}
+
+.minimize-button:pressed {
+    -fx-background-color: #333333;
+}
+
+/* Menu Style */
 .menu-container {
     -fx-background-color: #212121;
     -fx-border-width: 1px 0 1px 0;
@@ -48,29 +65,32 @@
     -fx-padding: 5px 1.25em;
 }
 
-
 .menu-container .menu:hover {
     -fx-background-color: #313133;
     -fx-background-radius: 10px;
 }
-.menu-container .menu:pressed {
-    -fx-background-color: #3a3a3b;
+
+.menu-container .menu:focused {
+    -fx-background-color: #313133;
+    -fx-background-radius: 10px;
 }
 
+/* Menu Items */
 .menu-container .menu .menu-item {
     -fx-background-color: #171717;
+    -fx-padding: 5px 1.25em;
+    -fx-text-fill: #FAFAFF;
 }
 
 .menu-container .menu .menu-item:hover {
     -fx-background-color: #313133;
 }
-.menu-container .menu .menu-item:pressed {
-    -fx-background-color: #3a3a3b;
+
+/* Entire Dropdown */
+.context-menu {
+    -fx-background-color: #313133;
 }
 
-.menu-container .menu .menu-item .label:hover {
-    -fx-background-color: #26272a;
-}
 
 /*Container Style*/
 .split-container {
@@ -101,20 +121,21 @@
 }
 
 /*Check box styles*/
+
 /* Checked state */
-.check-box {
-    -fx-background-color: transparent;
+.check-box .box {
+    -fx-background-color: #212121;
 }
 
 .check-box .box .mark {
-    -fx-background-color: #212121;
+    -fx-background-color: transparent;
 }
 
 .check-box:selected .box .mark {
     -fx-background-color: rgba(6, 190, 225, 0.8);
 }
 
-/*Input fields style*/
+/*Input fields style */
 .pass-len-field > .text-field {
     -fx-background-color: #8a8a8a;
     -fx-background-radius: 5;
@@ -133,4 +154,49 @@
 
 .pass-len-field > .label {
     -fx-background-color: transparent;
+}
+
+/* Button Styles */
+.other-buttons, .button-generate {
+    -fx-padding: 5px 10px;
+    -fx-background-color: #212121;
+    -fx-background-radius: 100px;
+    -fx-border-radius: 100px;
+    -fx-border-width: 0;
+}
+.other-buttons:hover {
+    -fx-background-color: #06BEE1;
+    -fx-text-fill: #212121;
+}
+
+.button-generate {
+    -fx-background-color: #212121;
+    -fx-text-fill: #FAFAFF;
+    -fx-border-width: 1;
+    -fx-border-color: #06BEE1;
+}
+
+.button-generate:hover {
+    -fx-border-width: 1;
+    -fx-background-color: #06BEE1;
+    -fx-text-fill: #212121;
+}
+
+.button-generate:pressed, .other-buttons:pressed {
+    -fx-background-color: #0599b2;
+    -fx-border-color: transparent;
+}
+
+/* Text Field Style */
+.text-field:focused {
+    -fx-border-width: 1;
+    -fx-border-color: #06BEE1;
+    -fx-border-radius: 3;
+}
+
+/* Text Area Style */
+.password-txt-area {
+    -fx-control-inner-background: #5c5c5c;
+    -fx-text-fill: #FAFAFF;
+    -fx-prompt-text-fill: #ef5c63;
 }
