@@ -29,7 +29,6 @@ public class MainController {
     //JavaFX Components
     @FXML private AnchorPane display;
     @FXML private Button closeButton;
-    @FXML private SplitPane contentWindow;
     @FXML private MenuBar menuBar;
 
     //Variables
@@ -123,7 +122,7 @@ public class MainController {
         try {
             // Load the FXML file for the About Dialog
             FXMLLoader loader = new FXMLLoader(getClass().getResource("About.fxml"));
-            Parent root = (Parent) loader.load();
+            Parent root = loader.load();
 
             // Create a new stage for the About Dialog
             Stage stage = new Stage();
