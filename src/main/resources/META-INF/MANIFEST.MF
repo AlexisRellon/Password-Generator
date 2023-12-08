@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: com.example.oop_gui.Launcher
+Version: 0.2.0-alpha
+Created-By: Alexis Rellon
