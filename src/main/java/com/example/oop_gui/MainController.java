@@ -154,8 +154,8 @@ public class MainController {
 
     @FXML private void onGenerateBtnPressed() {
         try {
-            String length = passwordLenField.getText();
-            int passwordLength = Integer.parseInt(length);
+//            String length = passwordLenField.getText();
+            int passwordLength = getValidThreshold(Integer.parseInt(passwordLenField.getText()));
 
             if (checkboxNumbers.isSelected()) allowedCharacters.append(getNumbersCharacters());
             if (checkboxLowerCase.isSelected()) allowedCharacters.append(getLowercaseLetters());
@@ -172,10 +172,12 @@ public class MainController {
 
             StringBuilder generatedPasswords = new StringBuilder();
 
+            int value = Integer.parseInt(quantityField.getText());
+
             int quantity = (
                     (quantityField.getText().isEmpty())
                     ? 1 // Default Value
-                    : Integer.parseInt(quantityField.getText()) // User-defined value
+                    : getValidThreshold(value) // User-defined value
                     );
 
             for (int i = 0; i < quantity; i++) {
@@ -190,6 +192,8 @@ public class MainController {
         } catch (NumberFormatException exception) {
             passwordLenField.setPromptText("Enter a value");
             passwordLenField.focusedProperty();
+
+            if (!passwordLenField.getText().isEmpty()) passwordLenField.setPromptText("Password Length");
         }
     }
 
@@ -299,6 +303,8 @@ public class MainController {
     }
 
     @FXML private void setCmdNew() {
+        passwordLenField.setPromptText("Password Length");
+
         Stage stage = (Stage) display.getScene().getWindow();
         String title = "New File (" + (++counter) + ")";
 
@@ -399,6 +405,18 @@ public class MainController {
                 checkboxSymbols.isSelected());
 
     }
+
+    private int getValidThreshold(int value) {
+        int maxValue = 99;
+        int quantityValue = Math.min(Integer.parseInt(quantityField.getText()), maxValue);
+        int passwordLenValue = Math.min(Integer.parseInt(passwordLenField.getText()), maxValue);
+
+        quantityField.setText(String.valueOf(quantityValue));
+        passwordLenField.setText(String.valueOf(passwordLenValue));
+
+        return Math.min(value, maxValue);
+    }
+
 
     // Getter-Setter Methods
     public String getUppercaseLetters() {
