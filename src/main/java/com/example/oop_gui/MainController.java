@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.input.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
@@ -35,7 +36,7 @@ public class MainController {
     private double xOffset = 0;
     private double yOffset = 0;
     private int counter = 0;
-
+    private static final int MAX_VALUE = 10;
 
     @FXML
     public void initialize() {
@@ -52,6 +53,8 @@ public class MainController {
         checkboxSymbols.setOnAction(this::onChkBoxSymbolsActions);
         passwordLenField.addEventFilter(KeyEvent.KEY_TYPED, this::consumeNonNumericKeys);
         quantityField.addEventFilter(KeyEvent.KEY_TYPED, this::consumeNonNumericKeys);
+        limitTextFieldInputLength(passwordLenField, MAX_VALUE);
+        limitTextFieldInputLength(quantityField, MAX_VALUE);
     }
 
     @FXML private void consumeNonNumericKeys(KeyEvent event) {
@@ -126,6 +129,13 @@ public class MainController {
 
             // Create a new stage for the About Dialog
             Stage stage = new Stage();
+
+            stage.getIcons().add(
+                    new Image(
+                            MainApplication.class.getResourceAsStream("/IMG/fav-icon.png")
+                    )
+            );
+
             stage.setTitle("About");
             stage.initStyle(StageStyle.UNDECORATED);
             stage.initModality(Modality.APPLICATION_MODAL);
@@ -135,12 +145,15 @@ public class MainController {
             AboutController aboutController = loader.getController();
 
             // Set the message
-            String message = new StringBuilder()
-                    .append("About this program\n\n\n")
-                    .append("This application generates secure passwords based on user-defined criteria.\n\n")
-                    .append("It utilizes various parameters such as length, character types (uppercase, lowercase, numbers, symbols), ")
-                    .append("and options to prevent duplicate or sequential characters.")
-                    .toString();
+            String message = """
+                             About this program
+                             
+                             
+                             This application generates secure passwords based on user-defined criteria.
+                             
+                             It utilizes various parameters such as length, character types (uppercase, lowercase, numbers, symbols),
+                             and options to prevent duplicate or sequential characters.
+                             """;
 
             // Set the message in the About Dialog controller
             aboutController.setDescription(message);
@@ -152,10 +165,35 @@ public class MainController {
         }
     }
 
+    @FXML private void showAboutUsPopUp() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("About-Us.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+
+            stage.getIcons().add(
+                    new Image(
+                            MainApplication.class.getResourceAsStream("/IMG/fav-icon.png")
+                    )
+            );
+
+            stage.setTitle("About Us");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(new Scene(root));
+
+            stage.showAndWait();
+        } catch (IOException err) {
+            err.printStackTrace();
+        }
+    }
+
     @FXML private void onGenerateBtnPressed() {
         try {
-//            String length = passwordLenField.getText();
-            int passwordLength = getValidThreshold(Integer.parseInt(passwordLenField.getText()));
+            int passwordLength = getValidPasswordLenThreshold(
+                    Integer.parseInt(passwordLenField.getText())
+            );
 
             if (checkboxNumbers.isSelected()) allowedCharacters.append(getNumbersCharacters());
             if (checkboxLowerCase.isSelected()) allowedCharacters.append(getLowercaseLetters());
@@ -172,12 +210,12 @@ public class MainController {
 
             StringBuilder generatedPasswords = new StringBuilder();
 
-            int value = Integer.parseInt(quantityField.getText());
-
             int quantity = (
-                    (quantityField.getText().isEmpty())
+                    (quantityField.getText().isEmpty()) // Condition Statement
                     ? 1 // Default Value
-                    : getValidThreshold(value) // User-defined value
+                    : getValidQuantityThreshold(
+                            Integer.parseInt(quantityField.getText()) // User-defined value
+                        )
                     );
 
             for (int i = 0; i < quantity; i++) {
@@ -406,17 +444,29 @@ public class MainController {
 
     }
 
-    private int getValidThreshold(int value) {
-        int maxValue = 99;
-        int quantityValue = Math.min(Integer.parseInt(quantityField.getText()), maxValue);
+    private int getValidPasswordLenThreshold(int value) {
+        int maxValue = 50;
         int passwordLenValue = Math.min(Integer.parseInt(passwordLenField.getText()), maxValue);
 
-        quantityField.setText(String.valueOf(quantityValue));
         passwordLenField.setText(String.valueOf(passwordLenValue));
 
         return Math.min(value, maxValue);
     }
+    private int getValidQuantityThreshold(int value) {
+        int maxValue = 99;
+        int quantityValue = Math.min(Integer.parseInt(quantityField.getText()), maxValue);
 
+        quantityField.setText(String.valueOf(quantityValue));
+
+        return Math.min(value, maxValue);
+    }
+
+    //Event Listener to limit inputted character on the text field
+    private void limitTextFieldInputLength(TextField textField, int maxLength) {
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
+            if(newValue.length() > maxLength) textField.setText(oldValue);
+        });
+    }
 
     // Getter-Setter Methods
     public String getUppercaseLetters() {
