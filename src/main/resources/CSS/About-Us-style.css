@@ -1,0 +1,30 @@
+.pop-up-window  {
+    -fx-background-color: #212121;
+    -fx-border-color: rgba(6, 190, 225, 0.8);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0, 2, 2);
+}
+
+.message {
+    -fx-text-fill: #FAFAFF;
+    -fx-background-color: transparent;
+    -fx-font-size: 10;
+}
+
+.header {
+    -fx-text-fill: #06BEE1;
+    -fx-font-weight: 500;
+    -fx-background-size: 15;
+}
+
+.button-close {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FFF;
+}
+
+.button-close:hover {
+    -fx-text-fill: #06BEE1;
+}
+
+.button-close:pressed {
+    -fx-text-fill: #0599b2;
+}

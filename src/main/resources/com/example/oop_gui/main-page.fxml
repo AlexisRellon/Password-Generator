@@ -36,21 +36,24 @@
                       <RowConstraints maxHeight="61.20000305175782" minHeight="10.0" prefHeight="34.199975585937494" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Password length">
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Password length" translateX="3.0">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </Label>
-                        <Label alignment="TOP_RIGHT" prefHeight="114.0" prefWidth="100.0" text="Include" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="100.0" text="Additional Options" GridPane.rowIndex="3" />
+                        <Label alignment="TOP_RIGHT" prefHeight="114.0" prefWidth="100.0" text="Include" translateX="3.0" GridPane.rowIndex="1" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="15.0" prefWidth="100.0" text="Additional Options" translateX="3.0" GridPane.rowIndex="3" />
                         <TextField fx:id="passwordLenField" prefHeight="7.0" prefWidth="490.0" promptText="Password Length" styleClass="pass-len-field" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1">
                            <tooltip>
                               <Tooltip text="The length of the password upon generating" />
-                           </tooltip></TextField>
+                           </tooltip>
+                           <GridPane.margin>
+                              <Insets right="13.0" />
+                           </GridPane.margin></TextField>
                         <GridPane hgap="5.0" styleClass="grid-pane-options" stylesheets="@../../../CSS/style.css" vgap="5.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                           <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.26663208007812" minWidth="10.0" prefWidth="59.20000381469727" />
-                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.8000205993652" minWidth="10.0" prefWidth="423.99999618530273" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.26663208007812" minWidth="10.0" prefWidth="69.13332748413086" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="451.8000205993652" minWidth="10.0" prefWidth="412.86667251586914" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -59,21 +62,27 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <CheckBox fx:id="checkboxNumbers" mnemonicParsing="false" selected="true" text="Numbers" translateX="-63.0" GridPane.columnIndex="1" />
-                              <CheckBox fx:id="checkboxLowerCase" mnemonicParsing="false" selected="true" text="Lower-case Characters" translateX="-63.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <CheckBox fx:id="checkboxUpperCase" mnemonicParsing="false" selected="true" text="Upper-case Characters" translateX="-63.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <CheckBox fx:id="checkboxNumbers" mnemonicParsing="false" selected="true" text="Numbers" translateX="-74.0" GridPane.columnIndex="1" />
+                              <CheckBox fx:id="checkboxLowerCase" mnemonicParsing="false" selected="true" text="Lower-case Characters" translateX="-74.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="checkboxUpperCase" mnemonicParsing="false" selected="true" text="Upper-case Characters" translateX="-74.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                               <CheckBox fx:id="checkboxSymbols" mnemonicParsing="false" selected="true" text="Symbols" GridPane.rowIndex="3" />
-                              <TextField fx:id="symbolsField" prefHeight="26.0" prefWidth="359.0" promptText="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" text="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                              <TextField fx:id="symbolsField" prefHeight="26.0" prefWidth="417.0" promptText="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" text="!&quot;;#$%&amp;'()*+,-./:;&lt;=&gt;?@[]^_`{|}~" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                  <tooltip>
                                     <Tooltip text="Symbols to be added in the password" />
-                                 </tooltip></TextField>
+                                 </tooltip>
+                                 <GridPane.margin>
+                                    <Insets right="13.0" />
+                                 </GridPane.margin></TextField>
                            </children>
                         </GridPane>
-                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Quantity" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER_RIGHT" prefHeight="18.0" prefWidth="100.0" text="Quantity" translateX="3.0" GridPane.rowIndex="2" />
                         <TextField fx:id="quantityField" promptText="Default is 1" GridPane.columnIndex="1" GridPane.rowIndex="2">
                            <tooltip>
                               <Tooltip text="Quantity of password to be generated" />
-                           </tooltip></TextField>
+                           </tooltip>
+                           <GridPane.margin>
+                              <Insets right="13.0" />
+                           </GridPane.margin></TextField>
                         <GridPane hgap="5.0" styleClass="grid-pane" stylesheets="@../../../CSS/style.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -128,6 +137,9 @@
          <padding>
             <Insets bottom="2.0" left="15.0" right="15.0" top="2.0" />
          </padding>
+         <tooltip>
+            <Tooltip text="Close" />
+         </tooltip>
       </Button>
       <Button fx:id="minimizeButton" defaultButton="true" layoutX="588.0" layoutY="16.0" mnemonicParsing="false" onAction="#minimizeActionEvent" prefHeight="10.0" prefWidth="10.0" styleClass="minimize-button" stylesheets="@../../../CSS/style.css" translateY="1.0" AnchorPane.rightAnchor="56.0" AnchorPane.topAnchor="0.0">
          <graphic>
@@ -140,6 +152,9 @@
          <padding>
             <Insets bottom="2.0" left="15.0" right="15.0" top="2.0" />
          </padding>
+         <tooltip>
+            <Tooltip text="Minimize" />
+         </tooltip>
       </Button>
       <MenuBar id="menu-container" fx:id="menuBar" layoutY="57.0" prefHeight="51.0" prefWidth="655.0" styleClass="menu-container" stylesheets="@../../../CSS/style.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="30.0">
          <menus>
@@ -153,6 +168,7 @@
             <Menu id="sub-menu" mnemonicParsing="false" text="About">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#showAboutPopUp" text="About this Program" />
+                  <MenuItem mnemonicParsing="false" onAction="#showAboutUsPopUp" text="About us" />
                </items></Menu>
          </menus>
          <opaqueInsets>
@@ -162,7 +178,7 @@
             <Insets bottom="9.0" left="9.0" right="9.0" top="9.0" />
          </padding>
       </MenuBar>
-      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="22.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="18.0" AnchorPane.topAnchor="3.0">
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="19.2" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="19.2" AnchorPane.topAnchor="5.0">
          <image>
             <Image url="@../../../IMG/fav-icon.png" />
          </image>
