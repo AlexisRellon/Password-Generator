@@ -34,6 +34,12 @@ javac -d bin src/*.java
 java -cp bin Main
 ```
 
+# Installation by downloading from the release
+* Download the current release of this repository.
+* Extract the zip folder anywhere you want.
+* On the project directory extract the zip folder named "Extract Here.zip" on the current directory.
+* Run the application 
+
 To use Random Password Generator, follow these steps:
 
 * Enter the desired length of the password in the input field.
