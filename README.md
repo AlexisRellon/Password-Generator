@@ -63,3 +63,8 @@ You can also report bugs or suggest new features by creating an issue on the [is
 * Alexis John Rellon - Frontend and Backend developer
 * Prince Stephen Lacsa - Programmer
 * Louis Clark Barbuco - Programmer
+
+---
+# Download link for installer
+* Installer (Open Source) - https://drive.google.com/file/d/1mxmOsD6OyMLk_mRouAeA4_1hQEzfpxFO/view?usp=drive_link
+* Installer - https://drive.google.com/file/d/1hFNx1RSw-8Kn-ebHJRzcDIC-wbSoyap_/view?usp=sharing
