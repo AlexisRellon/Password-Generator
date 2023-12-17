@@ -38,7 +38,14 @@ java -cp bin Main
 * Download the current release of this repository.
 * Extract the zip folder anywhere you want.
 * On the project directory extract the zip folder named "Extract Here.zip" on the current directory.
-* Run the application 
+* Run the application
+
+---
+# Download link for installer
+* Installer (Open Source) - https://drive.google.com/file/d/1mxmOsD6OyMLk_mRouAeA4_1hQEzfpxFO/view?usp=drive_link
+* Installer - https://drive.google.com/file/d/1hFNx1RSw-8Kn-ebHJRzcDIC-wbSoyap_/view?usp=sharing
+
+---
 
 To use Random Password Generator, follow these steps:
 
@@ -63,8 +70,3 @@ You can also report bugs or suggest new features by creating an issue on the [is
 * Alexis John Rellon - Frontend and Backend developer
 * Prince Stephen Lacsa - Programmer
 * Louis Clark Barbuco - Programmer
-
----
-# Download link for installer
-* Installer (Open Source) - https://drive.google.com/file/d/1mxmOsD6OyMLk_mRouAeA4_1hQEzfpxFO/view?usp=drive_link
-* Installer - https://drive.google.com/file/d/1hFNx1RSw-8Kn-ebHJRzcDIC-wbSoyap_/view?usp=sharing
