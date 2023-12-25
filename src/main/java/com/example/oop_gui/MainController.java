@@ -132,7 +132,7 @@ public class MainController {
 
             stage.getIcons().add(
                     new Image(
-                            MainApplication.class.getResourceAsStream("/IMG/fav-icon.png")
+                            Objects.requireNonNull(MainApplication.class.getResourceAsStream("/IMG/fav-icon.png"))
                     )
             );
 
@@ -174,7 +174,7 @@ public class MainController {
 
             stage.getIcons().add(
                     new Image(
-                            MainApplication.class.getResourceAsStream("/IMG/fav-icon.png")
+                            Objects.requireNonNull(MainApplication.class.getResourceAsStream("/IMG/fav-icon.png"))
                     )
             );
 
@@ -243,10 +243,10 @@ public class MainController {
 
     @FXML private void onCopyFirstLineActions() {
         String content = passwordTxtArea.getText();
-        String[] lines = content.split("\\R"); // Split by any line break
+        int lineBreakIndex = content.indexOf("\n"); // Find the first line break
 
-        if (lines.length > 0) {
-            String firstLine = lines[0]; // Retrieve the first line
+        if (lineBreakIndex != -1) {
+            String firstLine = content.substring(0, lineBreakIndex); // Retrieve the first line
 
             // Access the System clipboard
             Clipboard clipboard = Clipboard.getSystemClipboard();
